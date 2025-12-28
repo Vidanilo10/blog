@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SpotifyService, SpotifyPlaylist, SpotifyTrack } from '../../services/spotify.service';
+import { YoutubeService, YouTubeVideo } from '../../services/youtube.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-music',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './music.component.html',
   styleUrl: './music.component.css'
 })
@@ -15,11 +17,10 @@ export class MusicComponent implements OnInit {
   // Spotify playlist embed URL (replace with your playlist ID)
   spotifyPlaylistUrl: SafeResourceUrl = '';
   
-  // YouTube playlist or videos (replace with your video IDs)
-  youtubeVideos = [
-    { id: 'dQw4w9WgXcQ', title: 'Sample Video 1' },
-    { id: 'jNQXAC9IVRw', title: 'Sample Video 2' }
-  ];
+  // YouTube Integration
+  youtubeVideos: YouTubeVideo[] = [];
+  isYouTubeLoading = false;
+  youtubeSearchQuery = 'music';
 
   // Spotify Integration
   isSpotifyConnected = false;
@@ -31,7 +32,8 @@ export class MusicComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private youtubeService: YoutubeService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,25 @@ export class MusicComponent implements OnInit {
     if (this.isSpotifyConnected) {
       this.loadUserData();
     }
+
+    // Load YouTube videos
+    this.loadYouTubeVideos('music videos');
+  }
+
+  loadYouTubeVideos(query: string): void {
+    this.isYouTubeLoading = true;
+    this.youtubeSearchQuery = query;
+    
+    this.youtubeService.searchVideos(query, 6, environment.youtube.apiKey).subscribe({
+      next: (videos) => {
+        this.youtubeVideos = videos;
+        this.isYouTubeLoading = false;
+      },
+      error: (error) => {
+        console.error('YouTube API Error:', error);
+        this.isYouTubeLoading = false;
+      }
+    });
   }
 
   loadUserData(): void {

@@ -101,28 +101,43 @@
 
   <!-- YouTube Section -->
   <section class="music-section">
-    <h2>📺 YouTube Videos</h2>
-    <div class="youtube-grid">
-      <div class="youtube-video" *ngFor="let video of youtubeVideos">
-        <iframe 
-          [src]="getSafeYoutubeUrl(video.id)"
-          width="100%" 
-          height="315" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-        <p class="video-title">{{ video.title }}</p>
+    <h2>📺 YouTube Music Videos</h2>
+    
+    <div class="youtube-loading" *ngIf="isYouTubeLoading">
+      <p>Loading videos...</p>
+    </div>
+
+    <div class="youtube-grid" *ngIf="!isYouTubeLoading && youtubeVideos.length > 0">
+      <div class="youtube-card" *ngFor="let video of youtubeVideos">
+        <div class="video-thumbnail">
+          <iframe 
+            [src]="getSafeYoutubeUrl(video.id)"
+            width="100%" 
+            height="200" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="video-details">
+          <h3 class="video-title">{{ video.title }}</h3>
+          <p class="video-channel">{{ video.channelTitle }}</p>
+        </div>
       </div>
     </div>
-    <p class="api-info">
-      <strong>Note:</strong> To use YouTube Data API:
-      <br>1. Create a project in Google Cloud Console
-      <br>2. Enable YouTube Data API v3
-      <br>3. Create API credentials
-      <br>4. Use the API to fetch and display your playlists dynamically
-    </p>
+
+    <div class="search-bar">
+      <input 
+        type="text" 
+        [(ngModel)]="youtubeSearchQuery" 
+        placeholder="Search for music videos..."
+        class="youtube-search-input"
+        (keyup.enter)="loadYouTubeVideos(youtubeSearchQuery)">
+      <button class="search-btn" (click)="loadYouTubeVideos(youtubeSearchQuery)">
+        Search 🔍
+      </button>
+    </div>
   </section>
 
   <div class="integration-guide">
