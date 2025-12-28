@@ -6,6 +6,8 @@ export const environment = {
     redirectUri: 'http://localhost:4200/callback'
   },
   youtube: {
-    apiKey: 'AIzaSyACL4fHnPIRNnuJpZ61YNuXpKDnY-FExw4'
+    apiKey: 'AIzaSyACL4fHnPIRNnuJpZ61YNuXpKDnY-FExw4',
+    clientId: 'YOUR_YOUTUBE_CLIENT_ID', // Get from Google Cloud Console
+    redirectUri: 'http://localhost:4200/youtube-callback'
   }
 };

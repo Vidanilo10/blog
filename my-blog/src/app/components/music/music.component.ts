@@ -28,6 +28,8 @@ export class MusicComponent implements OnInit {
     { id: 'CevxZvSJLk8', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' }
   ];
   youtubeVideos: YouTubeVideo[] = [];
+  likedVideos: YouTubeVideo[] = [];
+  isYouTubeConnected = false;
   isYouTubeLoading = false;
   youtubeSearchQuery = 'music';
 
@@ -57,8 +59,47 @@ export class MusicComponent implements OnInit {
       this.loadUserData();
     }
 
-    // Load details for favorite videos
-    this.loadFavoriteVideoDetails();
+    // Check if user is authenticated with YouTube
+    this.isYouTubeConnected = this.youtubeService.isAuthenticated();
+    
+    if (this.isYouTubeConnected) {
+      this.loadLikedVideos();
+    } else {
+      // Load details for favorite videos
+      this.loadFavoriteVideoDetails();
+    }
+  }
+
+  connectYouTube(): void {
+    const authUrl = this.youtubeService.getAuthUrl(
+      environment.youtube.clientId,
+      environment.youtube.redirectUri
+    );
+    window.location.href = authUrl;
+  }
+
+  disconnectYouTube(): void {
+    this.youtubeService.logout();
+    this.isYouTubeConnected = false;
+    this.likedVideos = [];
+  }
+
+  loadLikedVideos(): void {
+    this.isYouTubeLoading = true;
+    this.youtubeService.getLikedVideos(12).subscribe({
+      next: (videos) => {
+        this.likedVideos = videos;
+        this.isYouTubeLoading = false;
+      },
+      error: (error) => {
+        console.error('YouTube API Error:', error);
+        if (error.status === 401) {
+          this.disconnectYouTube();
+          alert('Your YouTube session has expired. Please reconnect!');
+        }
+        this.isYouTubeLoading = false;
+      }
+    });
   }
 
   loadFavoriteVideoDetails(): void {

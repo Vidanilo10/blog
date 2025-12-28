@@ -326,6 +326,30 @@ h1 {
   transform: scale(1.05);
 }
 
+.youtube-connect-btn {
+  background: #FF0000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.youtube-connect-btn:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+
+.connect-hint {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .track-card {
