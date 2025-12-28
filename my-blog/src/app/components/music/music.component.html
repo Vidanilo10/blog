@@ -45,7 +45,7 @@
     <div class="tracks-grid">
       <div class="track-card" *ngFor="let track of topTracks.slice(0, 10); let i = index">
         <div class="track-number">{{ i + 1 }}</div>
-        <img [src]="track.album.images[0]?.url" [alt]="track.name" class="track-image">
+        <img [src]="track.album.images[0].url" [alt]="track.name" class="track-image">
         <div class="track-info">
           <h3 class="track-name">{{ track.name }}</h3>
           <p class="track-artist">{{ track.artists[0].name }}</p>

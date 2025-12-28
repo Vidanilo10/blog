@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -27,9 +28,14 @@ export class SpotifyService {
   private readonly TOKEN_URL = 'https://accounts.spotify.com/api/token';
   private readonly API_URL = 'https://api.spotify.com/v1';
 
-  constructor(private http: HttpClient) {
-    // Check if there's a token in sessionStorage
-    this.accessToken = sessionStorage.getItem('spotify_access_token');
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    // Check if there's a token in sessionStorage (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      this.accessToken = sessionStorage.getItem('spotify_access_token');
+    }
   }
 
   /**
@@ -57,7 +63,9 @@ export class SpotifyService {
 
   setAccessToken(token: string): void {
     this.accessToken = token;
-    sessionStorage.setItem('spotify_access_token', token);
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('spotify_access_token', token);
+    }
   }
 
   isAuthenticated(): boolean {
@@ -66,7 +74,9 @@ export class SpotifyService {
 
   logout(): void {
     this.accessToken = null;
-    sessionStorage.removeItem('spotify_access_token');
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem('spotify_access_token');
+    }
   }
 
   private getHeaders(): HttpHeaders {
