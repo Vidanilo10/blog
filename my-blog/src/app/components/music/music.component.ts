@@ -18,6 +18,15 @@ export class MusicComponent implements OnInit {
   spotifyPlaylistUrl: SafeResourceUrl = '';
   
   // YouTube Integration
+  favoriteVideos: YouTubeVideo[] = [
+    // Add your favorite video IDs here
+    { id: 'dQw4w9WgXcQ', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
+    { id: 'jNQXAC9IVRw', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
+    { id: 'kJQP7kiw5Fk', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
+    { id: '9bZkp7q19f0', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
+    { id: 'fJ9rUzIMcZQ', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
+    { id: 'CevxZvSJLk8', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' }
+  ];
   youtubeVideos: YouTubeVideo[] = [];
   isYouTubeLoading = false;
   youtubeSearchQuery = 'music';
@@ -48,8 +57,14 @@ export class MusicComponent implements OnInit {
       this.loadUserData();
     }
 
-    // Load YouTube videos
-    this.loadYouTubeVideos('music videos');
+    // Load details for favorite videos
+    this.loadFavoriteVideoDetails();
+  }
+
+  loadFavoriteVideoDetails(): void {
+    // If you want to fetch full details for your favorite videos,
+    // you can get them by video IDs. For now, they'll display with just the embed.
+    // The video details (title, channel) will be visible in the YouTube player itself.
   }
 
   loadYouTubeVideos(query: string): void {
