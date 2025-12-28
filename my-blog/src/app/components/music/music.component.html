@@ -12,12 +12,55 @@
     </button>
   </section>
 
-  <!-- User Playlists Section (shown when connected) -->
-  <section class="music-section" *ngIf="isSpotifyConnected && userPlaylists.length > 0">
+  <!-- Loading Indicator -->
+  <section class="music-section loading-section" *ngIf="isSpotifyConnected && isLoading">
+    <div class="loading-spinner">
+      <p>Loading your Spotify data...</p>
+    </div>
+  </section>
+
+  <!-- User Profile Section -->
+  <section class="music-section user-profile-section" *ngIf="isSpotifyConnected && userProfile">
     <div class="section-header">
-      <h2>🎵 Your Spotify Playlists</h2>
+      <div class="profile-info">
+        <img *ngIf="userProfile.images && userProfile.images.length > 0" 
+             [src]="userProfile.images[0].url" 
+             alt="Profile" 
+             class="profile-image">
+        <div>
+          <h2>Welcome, {{ userProfile.display_name }}! 🎵</h2>
+          <p class="profile-stats">
+            {{ userProfile.followers?.total || 0 }} followers
+            <span *ngIf="userPlaylists.length > 0"> • {{ userPlaylists.length }} playlists</span>
+          </p>
+        </div>
+      </div>
       <button class="disconnect-btn" (click)="disconnectSpotify()">Disconnect</button>
     </div>
+  </section>
+
+  <!-- Top Tracks Section -->
+  <section class="music-section" *ngIf="isSpotifyConnected && topTracks.length > 0">
+    <h2>🔥 Your Top Tracks</h2>
+    <div class="tracks-grid">
+      <div class="track-card" *ngFor="let track of topTracks.slice(0, 10); let i = index">
+        <div class="track-number">{{ i + 1 }}</div>
+        <img [src]="track.album.images[0]?.url" [alt]="track.name" class="track-image">
+        <div class="track-info">
+          <h3 class="track-name">{{ track.name }}</h3>
+          <p class="track-artist">{{ track.artists[0].name }}</p>
+          <p class="track-album">{{ track.album.name }}</p>
+        </div>
+        <a [href]="track.external_urls.spotify" target="_blank" class="play-btn" title="Play on Spotify">
+          ▶
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Playlists Section -->
+  <section class="music-section" *ngIf="isSpotifyConnected && userPlaylists.length > 0">
+    <h2>📚 Your Playlists</h2>
     <div class="playlists-grid">
       <div class="playlist-card" *ngFor="let playlist of userPlaylists.slice(0, 6)">
         <iframe 

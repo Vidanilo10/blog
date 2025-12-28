@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { SpotifyService, SpotifyPlaylist } from '../../services/spotify.service';
+import { SpotifyService, SpotifyPlaylist, SpotifyTrack } from '../../services/spotify.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -24,7 +24,10 @@ export class MusicComponent implements OnInit {
   // Spotify Integration
   isSpotifyConnected = false;
   userPlaylists: SpotifyPlaylist[] = [];
+  topTracks: SpotifyTrack[] = [];
+  userProfile: any = null;
   spotifyClientId = environment.spotify.clientId;
+  isLoading = false;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -40,8 +43,39 @@ export class MusicComponent implements OnInit {
     this.isSpotifyConnected = this.spotifyService.isAuthenticated();
     
     if (this.isSpotifyConnected) {
-      this.loadUserPlaylists();
+      this.loadUserData();
     }
+  }
+
+  loadUserData(): void {
+    this.isLoading = true;
+    
+    // Load user profile
+    this.spotifyService.getUserProfile().subscribe({
+      next: (profile) => {
+        this.userProfile = profile;
+      },
+      error: (error) => this.handleError(error)
+    });
+
+    // Load user playlists
+    this.loadUserPlaylists();
+    
+    // Load top tracks
+    this.loadTopTracks();
+  }
+
+  loadTopTracks(): void {
+    this.spotifyService.getUserTopTracks(20).subscribe({
+      next: (response) => {
+        this.topTracks = response.items;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.handleError(error);
+        this.isLoading = false;
+      }
+    });
   }
 
   connectSpotify(): void {
@@ -56,6 +90,8 @@ export class MusicComponent implements OnInit {
     this.spotifyService.logout();
     this.isSpotifyConnected = false;
     this.userPlaylists = [];
+    this.topTracks = [];
+    this.userProfile = null;
   }
 
   loadUserPlaylists(): void {
@@ -63,14 +99,17 @@ export class MusicComponent implements OnInit {
       next: (response) => {
         this.userPlaylists = response.items;
       },
-      error: (error) => {
-        console.error('Error loading playlists:', error);
-        if (error.status === 401) {
-          // Token expired
-          this.disconnectSpotify();
-        }
-      }
+      error: (error) => this.handleError(error)
     });
+  }
+
+  handleError(error: any): void {
+    console.error('Spotify API Error:', error);
+    if (error.status === 401) {
+      // Token expired - disconnect and prompt user to reconnect
+      this.disconnectSpotify();
+      alert('Your Spotify session has expired. Please reconnect!');
+    }
   }
 
   getSafeYoutubeUrl(videoId: string): SafeResourceUrl {

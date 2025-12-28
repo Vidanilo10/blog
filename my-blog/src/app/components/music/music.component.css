@@ -27,6 +27,122 @@ h1 {
   padding-bottom: 0.5rem;
 }
 
+/* Loading Section */
+.loading-section {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.loading-spinner p {
+  font-size: 1.2rem;
+  color: #1DB954;
+  font-weight: bold;
+}
+
+/* User Profile Section */
+.user-profile-section {
+  background: linear-gradient(135deg, #F0DCC5 0%, #fff 100%);
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #1DB954;
+  object-fit: cover;
+}
+
+.profile-stats {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* Top Tracks Section */
+.tracks-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.track-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.track-card:hover {
+  background: #F0DCC5;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.track-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1DB954;
+  min-width: 30px;
+  text-align: center;
+}
+
+.track-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.track-info {
+  flex: 1;
+}
+
+.track-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 0.25rem 0;
+}
+
+.track-artist {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0 0 0.25rem 0;
+}
+
+.track-album {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
+}
+
+.play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #1DB954;
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+  background: #1ed760;
+  transform: scale(1.1);
+}
+
 /* Spotify Auth Section */
 .spotify-auth-section {
   text-align: center;
@@ -118,6 +234,27 @@ h1 {
   margin-bottom: 1rem;
   border-radius: 8px;
   overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .track-card {
+    flex-wrap: wrap;
+  }
+  
+  .track-number {
+    order: -1;
+  }
+  
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .youtube-grid {
