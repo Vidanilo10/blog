@@ -7,7 +7,7 @@ export const environment = {
   },
   youtube: {
     apiKey: 'AIzaSyACL4fHnPIRNnuJpZ61YNuXpKDnY-FExw4',
-    clientId: 'YOUR_YOUTUBE_CLIENT_ID', // Get from Google Cloud Console
+    clientId: '529992481616-rhe0dshrn0ilrbggl6se921djppdps89.apps.googleusercontent.com',
     redirectUri: 'https://vidanilo10.github.io/blog/youtube-callback'
   }
 };
