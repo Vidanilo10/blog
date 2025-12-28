@@ -27,6 +27,93 @@ h1 {
   padding-bottom: 0.5rem;
 }
 
+/* Spotify Auth Section */
+.spotify-auth-section {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+}
+
+.spotify-auth-section h2 {
+  color: white;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.connect-description {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.spotify-connect-btn {
+  background-color: #000;
+  color: #1DB954;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spotify-connect-btn:hover {
+  background-color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.spotify-icon {
+  font-size: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.disconnect-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.disconnect-btn:hover {
+  background-color: #c0392b;
+}
+
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.playlist-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.playlist-name {
+  color: #000;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
 .spotify-container {
   margin-bottom: 1rem;
   border-radius: 8px;

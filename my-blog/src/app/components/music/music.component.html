@@ -1,9 +1,42 @@
 <div class="music-container">
   <h1>Music Collection</h1>
 
-  <!-- Spotify Section -->
+  <!-- Spotify Connection Section -->
+  <section class="music-section spotify-auth-section" *ngIf="!isSpotifyConnected">
+    <h2>🎵 Connect Your Spotify</h2>
+    <p class="connect-description">
+      Connect your Spotify account to see your personal playlists and favorite tracks!
+    </p>
+    <button class="spotify-connect-btn" (click)="connectSpotify()">
+      <span class="spotify-icon">♫</span> Connect with Spotify
+    </button>
+  </section>
+
+  <!-- User Playlists Section (shown when connected) -->
+  <section class="music-section" *ngIf="isSpotifyConnected && userPlaylists.length > 0">
+    <div class="section-header">
+      <h2>🎵 Your Spotify Playlists</h2>
+      <button class="disconnect-btn" (click)="disconnectSpotify()">Disconnect</button>
+    </div>
+    <div class="playlists-grid">
+      <div class="playlist-card" *ngFor="let playlist of userPlaylists.slice(0, 6)">
+        <iframe 
+          [src]="getSafeSpotifyPlaylistUrl(playlist.id)"
+          width="100%" 
+          height="380" 
+          frameBorder="0" 
+          allowfullscreen="" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy">
+        </iframe>
+        <p class="playlist-name">{{ playlist.name }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Default Spotify Section -->
   <section class="music-section">
-    <h2>🎵 Spotify Playlist</h2>
+    <h2>🎵 Featured Playlist</h2>
     <div class="spotify-container">
       <iframe 
         [src]="spotifyPlaylistUrl"
@@ -19,7 +52,7 @@
       <strong>Note:</strong> To customize this with your own playlists:
       <br>1. Get a Spotify playlist share link
       <br>2. Replace the playlist ID in the component
-      <br>3. For advanced features, set up Spotify Web API authentication
+      <br>3. For advanced features, connect your Spotify account above!
     </p>
   </section>
 
