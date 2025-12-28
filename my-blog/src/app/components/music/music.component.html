@@ -1,0 +1,75 @@
+<div class="music-container">
+  <h1>Music Collection</h1>
+
+  <!-- Spotify Section -->
+  <section class="music-section">
+    <h2>🎵 Spotify Playlist</h2>
+    <div class="spotify-container">
+      <iframe 
+        [src]="spotifyPlaylistUrl"
+        width="100%" 
+        height="380" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+      </iframe>
+    </div>
+    <p class="api-info">
+      <strong>Note:</strong> To customize this with your own playlists:
+      <br>1. Get a Spotify playlist share link
+      <br>2. Replace the playlist ID in the component
+      <br>3. For advanced features, set up Spotify Web API authentication
+    </p>
+  </section>
+
+  <!-- YouTube Section -->
+  <section class="music-section">
+    <h2>📺 YouTube Videos</h2>
+    <div class="youtube-grid">
+      <div class="youtube-video" *ngFor="let video of youtubeVideos">
+        <iframe 
+          [src]="getSafeYoutubeUrl(video.id)"
+          width="100%" 
+          height="315" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+        <p class="video-title">{{ video.title }}</p>
+      </div>
+    </div>
+    <p class="api-info">
+      <strong>Note:</strong> To use YouTube Data API:
+      <br>1. Create a project in Google Cloud Console
+      <br>2. Enable YouTube Data API v3
+      <br>3. Create API credentials
+      <br>4. Use the API to fetch and display your playlists dynamically
+    </p>
+  </section>
+
+  <div class="integration-guide">
+    <h3>🔧 API Integration Guide</h3>
+    <div class="guide-content">
+      <div class="api-card">
+        <h4>Spotify Web API</h4>
+        <ul>
+          <li>Register your app at <a href="https://developer.spotify.com" target="_blank">developer.spotify.com</a></li>
+          <li>Get Client ID and Client Secret</li>
+          <li>Implement OAuth 2.0 authentication</li>
+          <li>Access user playlists, tracks, and player controls</li>
+        </ul>
+      </div>
+      <div class="api-card">
+        <h4>YouTube Data API</h4>
+        <ul>
+          <li>Create project at <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+          <li>Enable YouTube Data API v3</li>
+          <li>Generate API key or OAuth credentials</li>
+          <li>Fetch playlists, videos, and channel information</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

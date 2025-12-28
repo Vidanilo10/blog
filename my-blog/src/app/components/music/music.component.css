@@ -1,0 +1,145 @@
+.music-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  color: #000;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.music-section {
+  margin-bottom: 3rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.music-section h2 {
+  color: #000;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #F0DCC5;
+  padding-bottom: 0.5rem;
+}
+
+.spotify-container {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.youtube-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.youtube-video {
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.youtube-video iframe {
+  border-radius: 4px;
+}
+
+.video-title {
+  color: #000;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.api-info {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #000;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-left: 4px solid #F0DCC5;
+}
+
+.integration-guide {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.integration-guide h3 {
+  color: #000;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.guide-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.api-card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #F0DCC5;
+}
+
+.api-card h4 {
+  color: #000;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.api-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.api-card li {
+  color: #000;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.api-card li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #F0DCC5;
+  font-weight: bold;
+}
+
+.api-card a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.api-card a:hover {
+  color: #F0DCC5;
+}
+
+@media (max-width: 768px) {
+  .youtube-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .music-section h2 {
+    font-size: 1.5rem;
+  }
+}

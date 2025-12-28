@@ -1,0 +1,29 @@
+<div class="movies-container">
+  <h1>My Movie Collection</h1>
+  
+  <div class="movies-grid">
+    <div class="movie-card" *ngFor="let movie of movies">
+      <div class="movie-image">
+        <img [src]="movie.imageUrl" [alt]="movie.title" loading="lazy">
+      </div>
+      <div class="movie-info">
+        <h2>{{ movie.title }}</h2>
+        <p class="movie-meta">
+          <span class="year">{{ movie.year }}</span>
+          <span class="rating" *ngIf="movie.rating">⭐ {{ movie.rating }}</span>
+        </p>
+        <p class="director">Directed by {{ movie.director }}</p>
+        <p class="description">{{ movie.description }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copyright-notice">
+    <p>
+      <strong>Copyright Notice:</strong> All movie images are sourced from Unsplash 
+      (free to use under Unsplash License). Movie descriptions are for educational 
+      and informational purposes only. All movie titles and content are property 
+      of their respective owners and studios.
+    </p>
+  </div>
+</div>

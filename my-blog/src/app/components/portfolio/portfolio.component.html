@@ -1,0 +1,18 @@
+<div class="portfolio-container">
+  <div class="redirect-card">
+    <div class="icon">🚀</div>
+    <h1>Redirecting to Portfolio</h1>
+    <p>You will be redirected to my professional portfolio in a few seconds...</p>
+    
+    <div class="spinner"></div>
+    
+    <button class="redirect-button" (click)="goToPortfolio()">
+      Go Now →
+    </button>
+    
+    <p class="portfolio-link">
+      Or click here: 
+      <a [href]="portfolioUrl" target="_blank">{{ portfolioUrl }}</a>
+    </p>
+  </div>
+</div>
