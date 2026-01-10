@@ -14,31 +14,55 @@ import { environment } from '../../../environments/environment';
   styleUrl: './music.component.css'
 })
 export class MusicComponent implements OnInit {
-  // Spotify playlist embed URL (replace with your playlist ID)
-  spotifyPlaylistUrl: SafeResourceUrl = '';
-  
-  // YouTube Integration
-  favoriteVideos: YouTubeVideo[] = [
-    // Add your favorite video IDs here
-    { id: 'dQw4w9WgXcQ', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
-    { id: 'jNQXAC9IVRw', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
-    { id: 'kJQP7kiw5Fk', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
-    { id: '9bZkp7q19f0', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
-    { id: 'fJ9rUzIMcZQ', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' },
-    { id: 'CevxZvSJLk8', title: '', description: '', thumbnail: '', channelTitle: '', publishedAt: '' }
+  // Recommended Spotify Playlists
+  recommendedSpotifyPlaylists = [
+    {
+      id: '37i9dQZF1DXcBWIGoYBM5M',
+      name: 'Today\'s Top Hits',
+      description: 'The hottest tracks in the world right now'
+    },
+    {
+      id: '37i9dQZF1DX4dyzvuaRJ0n',
+      name: 'Mint',
+      description: 'The best new music'
+    },
+    {
+      id: '37i9dQZF1DX0XUsuxWHRQd',
+      name: 'RapCaviar',
+      description: 'New music from Kendrick, Drake, and more'
+    },
+    {
+      id: '37i9dQZF1DXcF6B6QPhFDv',
+      name: 'Rock Classics',
+      description: 'Rock legends & epic songs'
+    },
+    {
+      id: '37i9dQZF1DX4SBhb3fqCJd',
+      name: 'Peaceful Piano',
+      description: 'Relax and indulge with beautiful piano pieces'
+    },
+    {
+      id: '37i9dQZF1DX1lVhptIYRda',
+      name: 'Hot Country',
+      description: 'Today\'s hottest country hits'
+    }
   ];
+
+  // Recommended YouTube Music Videos
+  recommendedYouTubeVideos: YouTubeVideo[] = [
+    { id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up', description: '', thumbnail: '', channelTitle: 'Rick Astley', publishedAt: '' },
+    { id: 'kJQP7kiw5Fk', title: 'Luis Fonsi - Despacito ft. Daddy Yankee', description: '', thumbnail: '', channelTitle: 'Luis Fonsi', publishedAt: '' },
+    { id: '9bZkp7q19f0', title: 'Gangnam Style', description: '', thumbnail: '', channelTitle: 'officialpsy', publishedAt: '' },
+    { id: 'fJ9rUzIMcZQ', title: 'Imagine Dragons - Believer', description: '', thumbnail: '', channelTitle: 'ImagineDragons', publishedAt: '' },
+    { id: 'CevxZvSJLk8', title: 'Katy Perry - Roar', description: '', thumbnail: '', channelTitle: 'Katy Perry', publishedAt: '' },
+    { id: 'JGwWNGJdvx8', title: 'Ed Sheeran - Shape of You', description: '', thumbnail: '', channelTitle: 'Ed Sheeran', publishedAt: '' },
+    { id: 'RgKAFK5djSk', title: 'Wiz Khalifa - See You Again', description: '', thumbnail: '', channelTitle: 'Wiz Khalifa', publishedAt: '' },
+    { id: 'hLQl3WQQoQ0', title: 'Adele - Someone Like You', description: '', thumbnail: '', channelTitle: 'Adele', publishedAt: '' }
+  ];
+
   youtubeVideos: YouTubeVideo[] = [];
-  likedVideos: YouTubeVideo[] = [];
-  isYouTubeConnected = false;
   isYouTubeLoading = false;
   youtubeSearchQuery = 'music';
-
-  // Spotify Integration
-  isSpotifyConnected = false;
-  userPlaylists: SpotifyPlaylist[] = [];
-  topTracks: SpotifyTrack[] = [];
-  userProfile: any = null;
-  spotifyClientId = environment.spotify.clientId;
   isLoading = false;
 
   constructor(
@@ -48,64 +72,7 @@ export class MusicComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Replace 'YOUR_PLAYLIST_ID' with your actual Spotify playlist ID
-    const spotifyUrl = 'https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M';
-    this.spotifyPlaylistUrl = this.sanitizer.bypassSecurityTrustResourceUrl(spotifyUrl);
-
-    // Check if user is authenticated with Spotify
-    this.isSpotifyConnected = this.spotifyService.isAuthenticated();
-    
-    if (this.isSpotifyConnected) {
-      this.loadUserData();
-    }
-
-    // Check if user is authenticated with YouTube
-    this.isYouTubeConnected = this.youtubeService.isAuthenticated();
-    
-    if (this.isYouTubeConnected) {
-      this.loadLikedVideos();
-    } else {
-      // Load details for favorite videos
-      this.loadFavoriteVideoDetails();
-    }
-  }
-
-  connectYouTube(): void {
-    const authUrl = this.youtubeService.getAuthUrl(
-      environment.youtube.clientId,
-      environment.youtube.redirectUri
-    );
-    window.location.href = authUrl;
-  }
-
-  disconnectYouTube(): void {
-    this.youtubeService.logout();
-    this.isYouTubeConnected = false;
-    this.likedVideos = [];
-  }
-
-  loadLikedVideos(): void {
-    this.isYouTubeLoading = true;
-    this.youtubeService.getLikedVideos(12).subscribe({
-      next: (videos) => {
-        this.likedVideos = videos;
-        this.isYouTubeLoading = false;
-      },
-      error: (error) => {
-        console.error('YouTube API Error:', error);
-        if (error.status === 401) {
-          this.disconnectYouTube();
-          alert('Your YouTube session has expired. Please reconnect!');
-        }
-        this.isYouTubeLoading = false;
-      }
-    });
-  }
-
-  loadFavoriteVideoDetails(): void {
-    // If you want to fetch full details for your favorite videos,
-    // you can get them by video IDs. For now, they'll display with just the embed.
-    // The video details (title, channel) will be visible in the YouTube player itself.
+    // Component initialized - recommendations will display automatically
   }
 
   loadYouTubeVideos(query: string): void {
@@ -122,71 +89,6 @@ export class MusicComponent implements OnInit {
         this.isYouTubeLoading = false;
       }
     });
-  }
-
-  loadUserData(): void {
-    this.isLoading = true;
-    
-    // Load user profile
-    this.spotifyService.getUserProfile().subscribe({
-      next: (profile) => {
-        this.userProfile = profile;
-      },
-      error: (error) => this.handleError(error)
-    });
-
-    // Load user playlists
-    this.loadUserPlaylists();
-    
-    // Load top tracks
-    this.loadTopTracks();
-  }
-
-  loadTopTracks(): void {
-    this.spotifyService.getUserTopTracks(20).subscribe({
-      next: (response) => {
-        this.topTracks = response.items;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.handleError(error);
-        this.isLoading = false;
-      }
-    });
-  }
-
-  connectSpotify(): void {
-    const authUrl = this.spotifyService.getAuthUrl(
-      this.spotifyClientId,
-      environment.spotify.redirectUri
-    );
-    window.location.href = authUrl;
-  }
-
-  disconnectSpotify(): void {
-    this.spotifyService.logout();
-    this.isSpotifyConnected = false;
-    this.userPlaylists = [];
-    this.topTracks = [];
-    this.userProfile = null;
-  }
-
-  loadUserPlaylists(): void {
-    this.spotifyService.getUserPlaylists().subscribe({
-      next: (response) => {
-        this.userPlaylists = response.items;
-      },
-      error: (error) => this.handleError(error)
-    });
-  }
-
-  handleError(error: any): void {
-    console.error('Spotify API Error:', error);
-    if (error.status === 401) {
-      // Token expired - disconnect and prompt user to reconnect
-      this.disconnectSpotify();
-      alert('Your Spotify session has expired. Please reconnect!');
-    }
   }
 
   getSafeYoutubeUrl(videoId: string): SafeResourceUrl {

@@ -7,7 +7,21 @@
 h1 {
   color: #000;
   font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.intro-text {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
   margin-bottom: 2rem;
+}
+
+.section-description {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -421,37 +435,52 @@ h1 {
 }
 
 .guide-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  text-align: center;
 }
 
-.api-card {
+.info-text {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.customization-tip {
   background: #f9f9f9;
   padding: 1.5rem;
   border-radius: 8px;
   border: 2px solid #F0DCC5;
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.api-card h4 {
+.customization-tip h4 {
   color: #000;
   font-size: 1.3rem;
   margin-bottom: 1rem;
 }
 
-.api-card ul {
+.customization-tip p {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.customization-tip ul {
   list-style: none;
   padding: 0;
 }
 
-.api-card li {
+.customization-tip li {
   color: #000;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   padding-left: 1.5rem;
   position: relative;
+  line-height: 1.5;
 }
 
-.api-card li::before {
+.customization-tip li::before {
   content: "▸";
   position: absolute;
   left: 0;
@@ -459,13 +488,29 @@ h1 {
   font-weight: bold;
 }
 
-.api-card a {
-  color: #000;
-  text-decoration: underline;
+.customization-tip code {
+  background: #e8e8e8;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
 }
 
-.api-card a:hover {
-  color: #F0DCC5;
+.playlist-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.playlist-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.playlist-description {
+  color: #666;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {
