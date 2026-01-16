@@ -284,6 +284,15 @@ export class MovieService {
       description: 'A dramatization of the July 20, 1944 assassination attempt on Adolf Hitler by a group of German officers.',
       imageUrl: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=600&fit=crop',
       rating: 7.1
+    },
+    {
+      id: 32,
+      title: 'The Chorus (Les Choristes)',
+      year: 2004,
+      director: 'Christophe Barratier',
+      description: 'A music teacher transforms the lives of troubled boys at a boarding school in post-war France through the power of choral singing. A heartwarming tale of hope and redemption.',
+      imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop',
+      rating: 7.8
     }
   ];
 

@@ -17,14 +17,19 @@ export class MusicComponent implements OnInit {
   // Recommended Spotify Playlists
   recommendedSpotifyPlaylists = [
     {
+      id: '7Liy23N0CzfBAhv65Fpkmp',
+      name: 'Silhouette',
+      description: 'My personal curated playlist'
+    },
+    {
       id: '37i9dQZF1DXcBWIGoYBM5M',
       name: 'Today\'s Top Hits',
       description: 'The hottest tracks in the world right now'
     },
     {
-      id: '37i9dQZF1DX4dyzvuaRJ0n',
-      name: 'Mint',
-      description: 'The best new music'
+      id: '4XWEODKTQQMhkS94qPR1HG',
+      name: 'My Playlist',
+      description: 'Another personal curated playlist'
     },
     {
       id: '37i9dQZF1DX0XUsuxWHRQd',
@@ -48,16 +53,25 @@ export class MusicComponent implements OnInit {
     }
   ];
 
+  // Recommended YouTube Playlists
+  recommendedYouTubePlaylists = [
+    {
+      id: 'PLKHCOy02Wdik9RFgFygsLNG1-Mk1UANOg',
+      name: 'My YouTube Music Playlist',
+      description: 'Curated collection of my favorite tracks'
+    }
+  ];
+
   // Recommended YouTube Music Videos
   recommendedYouTubeVideos: YouTubeVideo[] = [
-    { id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up', description: '', thumbnail: '', channelTitle: 'Rick Astley', publishedAt: '' },
+    { id: 'dGd9DTTrX4U', title: 'Alicia Keys: NPR Music Tiny Desk Concert', description: '', thumbnail: '', channelTitle: 'NPR Music', publishedAt: '' },
+    { id: 'QrR_gm6RqCo', title: 'Mac Miller: NPR Music Tiny Desk Concert', description: '', thumbnail: '', channelTitle: 'NPR Music', publishedAt: '' },
+    { id: '2CANclhdlaura', title: 'Leon Bridges: NPR Music Tiny Desk Concert', description: '', thumbnail: '', channelTitle: 'NPR Music', publishedAt: '' },
+    { id: 'DFiLdByWIDY', title: 'Lizzo: NPR Music Tiny Desk Concert', description: '', thumbnail: '', channelTitle: 'NPR Music', publishedAt: '' },
+    { id: 'yzTuBuRdAyA', title: 'Billie Eilish: NPR Music Tiny Desk (Home) Concert', description: '', thumbnail: '', channelTitle: 'NPR Music', publishedAt: '' },
     { id: 'kJQP7kiw5Fk', title: 'Luis Fonsi - Despacito ft. Daddy Yankee', description: '', thumbnail: '', channelTitle: 'Luis Fonsi', publishedAt: '' },
-    { id: '9bZkp7q19f0', title: 'Gangnam Style', description: '', thumbnail: '', channelTitle: 'officialpsy', publishedAt: '' },
-    { id: 'fJ9rUzIMcZQ', title: 'Imagine Dragons - Believer', description: '', thumbnail: '', channelTitle: 'ImagineDragons', publishedAt: '' },
-    { id: 'CevxZvSJLk8', title: 'Katy Perry - Roar', description: '', thumbnail: '', channelTitle: 'Katy Perry', publishedAt: '' },
     { id: 'JGwWNGJdvx8', title: 'Ed Sheeran - Shape of You', description: '', thumbnail: '', channelTitle: 'Ed Sheeran', publishedAt: '' },
-    { id: 'RgKAFK5djSk', title: 'Wiz Khalifa - See You Again', description: '', thumbnail: '', channelTitle: 'Wiz Khalifa', publishedAt: '' },
-    { id: 'hLQl3WQQoQ0', title: 'Adele - Someone Like You', description: '', thumbnail: '', channelTitle: 'Adele', publishedAt: '' }
+    { id: 'RgKAFK5djSk', title: 'Wiz Khalifa - See You Again ft. Charlie Puth', description: '', thumbnail: '', channelTitle: 'Wiz Khalifa', publishedAt: '' }
   ];
 
   youtubeVideos: YouTubeVideo[] = [];
@@ -93,6 +107,11 @@ export class MusicComponent implements OnInit {
 
   getSafeYoutubeUrl(videoId: string): SafeResourceUrl {
     const url = `https://www.youtube.com/embed/${videoId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  getSafeYoutubePlaylistUrl(playlistId: string): SafeResourceUrl {
+    const url = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

@@ -73,6 +73,318 @@
 .main-content {
   flex: 1;
   width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Silhouette Section */
+.silhouette-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.silhouette-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.symbol, .shape {
+  color: #000;
+  font-weight: bold;
+  position: absolute;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.symbol:hover, .shape:hover {
+  opacity: 0.3;
+}
+
+/* Code Symbols */
+.curly-braces {
+  font-size: 4rem;
+  top: 15%;
+  left: 10%;
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.curly-braces-2 {
+  font-size: 3.5rem;
+  top: 70%;
+  right: 15%;
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.brackets {
+  font-size: 3.5rem;
+  top: 25%;
+  right: 20%;
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.brackets-2 {
+  font-size: 3rem;
+  bottom: 20%;
+  left: 12%;
+  animation: float 3.2s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+.angles {
+  font-size: 3rem;
+  top: 40%;
+  left: 25%;
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.function {
+  font-size: 2.5rem;
+  font-style: italic;
+  bottom: 35%;
+  right: 25%;
+  animation: float 3.2s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Math Symbols */
+.pi {
+  font-size: 4.5rem;
+  font-family: Georgia, serif;
+  top: 10%;
+  right: 10%;
+  animation: float 3.8s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.pi-2 {
+  font-size: 4rem;
+  font-family: Georgia, serif;
+  bottom: 25%;
+  left: 8%;
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
+
+.infinity {
+  font-size: 4rem;
+  top: 50%;
+  right: 8%;
+  animation: float 3.3s ease-in-out infinite;
+  animation-delay: 0.7s;
+}
+
+.infinity-2 {
+  font-size: 3.5rem;
+  bottom: 15%;
+  right: 30%;
+  animation: float 3.6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.sigma {
+  font-size: 4.2rem;
+  font-family: Georgia, serif;
+  top: 35%;
+  right: 15%;
+  animation: float 3.6s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.lambda {
+  font-size: 3.8rem;
+  font-family: Georgia, serif;
+  bottom: 30%;
+  left: 20%;
+  animation: float 3.4s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+/* Code Elements */
+.binary {
+  font-size: 3rem;
+  font-family: 'Courier New', monospace;
+  top: 20%;
+  left: 5%;
+  animation: float 3.7s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.binary-2 {
+  font-size: 3.2rem;
+  font-family: 'Courier New', monospace;
+  top: 60%;
+  right: 5%;
+  animation: float 3.4s ease-in-out infinite;
+  animation-delay: 1.7s;
+}
+
+.terminal {
+  font-size: 3.2rem;
+  font-family: 'Courier New', monospace;
+  top: 45%;
+  left: 15%;
+  animation: float 3.9s ease-in-out infinite;
+  animation-delay: 0.9s;
+}
+
+.hash {
+  font-size: 3.5rem;
+  bottom: 40%;
+  right: 12%;
+  animation: float 3.1s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+.hash-2 {
+  font-size: 3rem;
+  top: 55%;
+  left: 30%;
+  animation: float 3.3s ease-in-out infinite;
+  animation-delay: 2.1s;
+}
+
+.arrow {
+  font-size: 3.3rem;
+  bottom: 25%;
+  right: 20%;
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 1.9s;
+}
+
+/* Geometric Shapes */
+.circle {
+  width: 60px;
+  height: 60px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 30%;
+  right: 5%;
+  animation: float 3.4s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+.circle-2 {
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+  border-radius: 50%;
+  bottom: 10%;
+  left: 25%;
+  animation: float 3.7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 70px solid #000;
+  top: 5%;
+  left: 30%;
+  animation: float 3.6s ease-in-out infinite;
+  animation-delay: 1.1s;
+}
+
+.triangle-2 {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 60px solid #000;
+  bottom: 35%;
+  left: 5%;
+  animation: float 3.3s ease-in-out infinite;
+  animation-delay: 2.2s;
+}
+
+.square {
+  width: 55px;
+  height: 55px;
+  background-color: #000;
+  transform: rotate(45deg);
+  top: 65%;
+  left: 18%;
+  animation: float 3.2s ease-in-out infinite, rotate 8s linear infinite;
+  animation-delay: 0.6s, 0s;
+}
+
+.square-2 {
+  width: 45px;
+  height: 45px;
+  background-color: #000;
+  transform: rotate(45deg);
+  top: 12%;
+  right: 28%;
+  animation: float 3.5s ease-in-out infinite, rotate 10s linear infinite;
+  animation-delay: 1.3s, 0.5s;
+}
+
+.hexagon {
+  width: 50px;
+  height: 28.87px;
+  background-color: #000;
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  animation: float 3.8s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
+
+.hexagon::before {
+  content: "";
+  position: absolute;
+  top: -14.43px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 14.43px solid #000;
+}
+
+.hexagon::after {
+  content: "";
+  position: absolute;
+  bottom: -14.43px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 14.43px solid #000;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
 }
 
 /* Footer */
@@ -107,5 +419,47 @@
   .nav-links a {
     padding: 0.3rem 0.6rem;
     font-size: 0.9rem;
+  }
+
+  /* Scale down symbols for mobile */
+  .symbol {
+    font-size: 2rem !important;
+  }
+
+  .circle, .circle-2 {
+    width: 40px;
+    height: 40px;
+  }
+
+  .triangle, .triangle-2 {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid #000;
+  }
+
+  .square, .square-2 {
+    width: 35px;
+    height: 35px;
+  }
+
+  .hexagon {
+    width: 30px;
+    height: 17.32px;
+  }
+
+  .hexagon::before,
+  .hexagon::after {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+  }
+
+  .hexagon::before {
+    top: -8.66px;
+    border-bottom: 8.66px solid #000;
+  }
+
+  .hexagon::after {
+    bottom: -8.66px;
+    border-top: 8.66px solid #000;
   }
 }

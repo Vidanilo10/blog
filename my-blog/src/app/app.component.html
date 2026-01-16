@@ -15,6 +15,34 @@
     <router-outlet></router-outlet>
   </main>
 
+  <div class="silhouette-section">
+    <div class="silhouette-container">
+      <!-- Code symbols -->
+      <div class="symbol curly-braces">{{ '{' }}{{ '}' }}</div>
+      <div class="symbol brackets">[]</div>
+      <div class="symbol angles">&lt;/&gt;</div>
+      <div class="symbol function">f(x)</div>
+      
+      <!-- Math symbols -->
+      <div class="symbol pi">π</div>
+      <div class="symbol infinity">∞</div>
+      <div class="symbol sigma">Σ</div>
+      <div class="symbol lambda">λ</div>
+      
+      <!-- Code elements -->
+      <div class="symbol binary">01</div>
+      <div class="symbol terminal">$_</div>
+      <div class="symbol hash">#</div>
+      <div class="symbol arrow">→</div>
+      
+      <!-- Geometric shapes -->
+      <div class="shape circle"></div>
+      <div class="shape triangle"></div>
+      <div class="shape square"></div>
+      <div class="shape hexagon"></div>
+    </div>
+  </div>
+
   <footer class="footer">
     <p>&copy; {{ currentYear }} My Blog. All rights reserved.</p>
     <p class="footer-note">Built with Angular & TypeScript | Deployed on GitHub Pages</p>

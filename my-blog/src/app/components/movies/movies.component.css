@@ -7,8 +7,190 @@
 h1 {
   color: #000;
   font-size: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
+}
+
+.intro-section {
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  position: relative;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #F0DCC5, #d4c4a8, #F0DCC5);
+}
+
+.intro-header {
+  background: linear-gradient(135deg, #F0DCC5 0%, #e5d5bb 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.intro-icon {
+  font-size: 3.5rem;
+  animation: pulse 2s ease-in-out infinite;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.intro-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.intro-content {
+  padding: 2.5rem;
+}
+
+.intro-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.highlight-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #F0DCC5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(240, 220, 197, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.highlight-item:hover::before {
+  left: 100%;
+}
+
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: #d4c4a8;
+}
+
+.highlight-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+  animation: float 3s ease-in-out infinite;
+}
+
+.highlight-item:nth-child(1) .highlight-emoji {
+  animation-delay: 0s;
+}
+
+.highlight-item:nth-child(2) .highlight-emoji {
+  animation-delay: 0.5s;
+}
+
+.highlight-item:nth-child(3) .highlight-emoji {
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.highlight-text {
+  font-size: 1rem;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.intro-closing {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #000;
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(240, 220, 197, 0.2) 0%, rgba(240, 220, 197, 0.05) 100%);
+  border-radius: 8px;
+  border-left: 4px solid #F0DCC5;
+  margin: 0;
+}
+
+.intro-text {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  line-height: 1.8;
+  color: #333;
+  font-size: 1.05rem;
+  border-left: 5px solid #F0DCC5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
 .movies-grid {
@@ -107,5 +289,46 @@ h1 {
   
   h1 {
     font-size: 2rem;
+  }
+
+  .intro-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .intro-title {
+    font-size: 1.8rem;
+  }
+
+  .intro-content {
+    padding: 1.5rem;
+  }
+
+  .intro-paragraph {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .highlight-item {
+    padding: 1rem;
+  }
+
+  .highlight-emoji {
+    font-size: 1.5rem;
+  }
+
+  .highlight-text {
+    font-size: 0.95rem;
+  }
+
+  .intro-closing {
+    font-size: 1rem;
+    padding: 1rem;
   }
 }
